@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Chatbot</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .chat-container {
+            width: 100%;
+            max-width: 400px;
+            height: 600px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-header {
+            background-color: #4CAF50;
+            padding: 15px;
+            color: white;
+            font-size: 18px;
+            text-align: center;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .chat-messages {
+            flex-grow: 1;
+            padding: 15px;
+            overflow-y: auto;
+        }
+
+        .message {
+            margin-bottom: 15px;
+        }
+
+        .message.user {
+            text-align: right;
+        }
+
+        .message .content {
+            display: inline-block;
+            padding: 10px;
+            border-radius: 10px;
+            max-width: 70%;
+        }
+
+        .message.user .content {
+            background-color: #DCF8C6;
+        }
+
+        .message.bot .content {
+            background-color: #f0f0f0;
+        }
+
+        .chat-input {
+            display: flex;
+            border-top: 1px solid #ddd;
+            padding: 10px;
+        }
+
+        .chat-input input {
+            flex-grow: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            outline: none;
+            font-size: 16px;
+        }
+
+        .chat-input button {
+            margin-left: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+        }
+
+        /* Responsive styling */
+        @media (max-width: 500px) {
+            .chat-container {
+                width: 100%;
+                height: 90%;
+                border-radius: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="chat-container">
+    <div class="chat-messages" id="chatMessages">
+        <div class="message bot">
+            <div class="content">Hello welcome to Magicbus! How can I assist you today?</div>
+        </div>
+    </div>
+    <div class="chat-input">
+        <input type="text" id="userInput" placeholder="Type a message..." onkeypress="handleKeyPress(event)">
+        <button onclick="sendMessage()">></button>
+    </div>
+</div>
+
+<script>
+    function sendMessage() {
+        const inputField = document.getElementById("userInput");
+        const message = inputField.value.trim();
+
+        if (message !== "") {
+            appendMessage("user", message);
+            inputField.value = "";
+
+            // Simulate a bot response
+            setTimeout(() => {
+                const botResponse = getBotResponse(message);
+                appendMessage("bot", botResponse);
+            }, 500);
+        }
+    }
+
+    function appendMessage(sender, message) {
+        const chatMessages = document.getElementById("chatMessages");
+        const messageElement = document.createElement("div");
+        messageElement.classList.add("message", sender);
+
+        const contentElement = document.createElement("div");
+        contentElement.classList.add("content");
+        contentElement.innerText = message;
+
+        messageElement.appendChild(contentElement);
+        chatMessages.appendChild(messageElement);
+        chatMessages.scrollTop = chatMessages.scrollHeight; // Scroll to the bottom
+    }
+
+    function getBotResponse(userMessage) {
+        const responses = {
+            "hello": "Hello! How can I help you?",
+            "hi": "Hi there! How can I assist?",
+            "bye": "Goodbye! Have a nice day.",
+            "help": "Sure, I'm here to help! What do you need assistance with?",
+            "magicbus": "Magic Bus Foundation is one of the top five NGo's In Education and skilling space in india. For further information please visit",
+            "how are you": "i am good what about you?"
+        };
+        return responses[userMessage.toLowerCase()] || "I'm sorry, I don't understand that."; 
+    }
+    function handleKeyPress(event) {
+        if (event.key === "Enter") {
+            sendMessage();
+        }
+    }
+</script>
+</body>
+</html>

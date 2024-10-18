@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            color: #333;
+            line-height: 1.6;
+        }
+
+        h2 {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 36px;
+            font-weight: bold;
+            color: #343a40;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .contact-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 50px;
+            max-width: 1200px;
+            margin: 40px auto;
+            background-color: #fff;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .contact-container:hover {
+            transform: scale(1.02);
+        }
+
+        /* Google Map Section */
+        .map-container {
+            width: 50%;
+            margin-right: 20px;
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 450px;
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Contact Details Section */
+        .details-container {
+            width: 45%;
+            padding: 30px;
+            background-color: #f9f9f9;
+            border-radius: 15px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .details-container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            clip-path: circle(150px at 80% 20%);
+            z-index: -1;
+        }
+
+        .details-container h3 {
+            margin-bottom: 20px;
+            font-size: 28px;
+            font-weight: 600;
+            color: #007bff;
+        }
+
+        .details-container p {
+            margin-bottom: 20px;
+            font-size: 18px;
+            color: #555;
+            line-height: 1.8;
+            display: flex;
+            align-items: center;
+        }
+
+        .details-container strong {
+            color: #333;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .details-container a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .details-container a:hover {
+            text-decoration: underline;
+            color: #0056b3;
+        }
+
+        /* Icons */
+        .details-container p::before {
+            content: url('https://via.placeholder.com/24/007bff/FFFFFF?text=📍');
+            margin-right: 10px;
+        }
+
+        .details-container p:nth-child(2)::before {
+            content: url('https://via.placeholder.com/24/007bff/FFFFFF?text=📞');
+        }
+
+        .details-container p:nth-child(3)::before {
+            content: url('https://via.placeholder.com/24/007bff/FFFFFF?text=📧');
+        }
+
+        .details-container p:nth-child(4)::before {
+            content: url('https://via.placeholder.com/24/007bff/FFFFFF?text=🕒');
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .contact-container {
+                flex-direction: column;
+                padding: 20px;
+            }
+
+            .map-container, .details-container {
+                width: 100%;
+                margin-bottom: 30px;
+            }
+
+            h2 {
+                font-size: 30px;
+            }
+
+            .details-container h3 {
+                font-size: 24px;
+            }
+
+            .details-container p {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h2>Contact Us</h2>
+
+    <div class="contact-container">
+        <!-- Google Map Section -->
+        <div class="map-container">
+            <!-- Google Map Embed -->
+            <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3783.7913303485174!2d73.84142681535288!3d18.51656048741211!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2c068aaa29763%3A0xf37ef253aa47e7db!2sDeccan%20Gymkhana%20Bus%20Stop!5e0!3m2!1sen!2sin!4v1605074463123!5m2!1sen!2sin" 
+                allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+        </div>
+
+        <!-- Contact Details Section -->
+        <div class="details-container">
+            <h3>Get in Touch</h3>
+            <p><strong>Address:</strong> 2nd Floor, Unity Complex, 202,672/2/1, Nr Deccan PMT Bus Stop, Pulachiwadi, Next to Hotel Chhatrapati, Pune, 411004</p>
+            <p><strong>Phone:</strong> +91-8180990133</p>
+            <p><strong>Email:</strong> <a href="mailto:info@magicbusindia.org">info@magicbusindia.org</a></p>
+            <p><strong>Working Hours:</strong> Monday - Friday, 9AM - 6PM</p>
+        </div>
+    </div>
+</body>
+</html>

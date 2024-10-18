@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website with To-Do List</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #ff8686;
+            color: #333;
+            padding-bottom: 50px;
+        }
+
+        nav {
+            background-color: #333;
+            padding: 15px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+        }
+
+        nav ul li {
+            margin: 0 20px;
+        }
+
+        nav ul li a {
+            color: #141212;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+
+        section {
+            padding: 50px;
+        }
+
+        #home {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        /* Sidebar To-Do List */
+        .todo-container {
+    width: 45%;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.todo-container h2 {
+    font-size: 28px;
+    margin-bottom: 15px;
+    color: #d64e4e;
+    text-align: center;
+}
+
+.todo-input {
+    display: flex;
+    flex-direction: column;
+}
+
+.todo-input input, .todo-input textarea {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+.todo-input input:focus, .todo-input textarea:focus {
+    border-color: #ff8686;
+}
+
+        .create-button {
+            padding: 10px 0;
+            background-color: #87ceeb;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .create-button:hover {
+            background-color: #4682b4;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            background-color: #f9f9f9;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .remove-btn {
+            background-color: #ff6b6b;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+        .remove-btn:hover {
+            background-color: #ff4b4b;
+        }
+
+        .timer-container {
+            width: 45%;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        #timer-display {
+            font-size: 4rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .timer-container button {
+            padding: 10px 20px;
+            background-color: #87ceeb;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 10px;
+            transition: background-color 0.3s;
+        }
+
+.timer-container button:hover {
+    background-color: #4682b4;
+}
+
+@media (max-width: 768px) {
+    section {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .todo-container, .timer-container {
+        width: 100%;
+    }
+
+    #timer-display {
+        font-size: 3rem;
+    }
+}
+
+        .header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #93e9e9;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .header-logo {
+            width: 120px;
+        }
+
+        .title-holder h1 {
+            font-size: 28px;
+            color: #d64e4e;
+            text-align: center;
+        }
+
+        .title-holder p {
+            font-size: 14px;
+            color: #333;
+            text-align: center;
+        }
+
+.chat-icon {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+    z-index: 1000;
+}
+
+.chat-icon img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.chatbot-window {
+    display: none;
+    position: fixed;
+    bottom: 100px;
+    right: 20px;
+    width: 300px;
+    height: 450px;
+    background-color: white;
+    border: 1px solid #ccc;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    border-radius: 8px;
+}
+
+
+.chatbot-header {
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    border-radius: 8px 8px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.chatbot-header h4 {
+    margin: 0;
+}
+
+.close-btn {
+    cursor: pointer;
+    font-size: 20px;
+    color: white;
+}
+
+
+.chatbot-body {
+    padding: 10px;
+    height: 380px;
+    overflow-y: auto;
+}
+
+    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+    <div class="header-row">
+        <div class="col-md-12 title-lines col-lg-12">
+            <div class="row pt-4 align-items-xl-end main-head">
+                <div class="col-lg-2 col-md-3">
+                    <!-- Magic Bus Foundation Logo -->
+                    <img src="magicbus.png" alt="" class="header-logo">
+                </div>
+                <div class="title-holder col-lg-8 col-md-6 text-center">
+                    <h1 class="header-college-name">Magic Bus Foundation</h1>
+                    <p class="head-line">2 nd floor, unity complex, 202,672/2/1 Nr Deccan PMT bus stop, pulachiwadi, Next to hotel chhatrapati, pune, 411004</p>
+                    <p class="head-line">Affiliated to Accenture</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+   <!-- Add a logout option to the top right -->
+<nav>
+    <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="https://www.magicbus.org/about-us.php">About Us</a></li>
+        <li><a href="http://127.0.0.1:5500/contact.html">Contact Us</a></li>
+        <li style="margin-left: auto;"><a href="#" id="logout-link">Logout</a></li> <!-- Logout button on the right -->
+    </ul>
+</nav>
+
+
+    <section id="home">
+        <div class="todo-container">
+            <h2>To-Do List</h2>
+            <ul id="todo-list"></ul>
+            <div class="todo-input">
+                <input type="text" id="taskName" placeholder="Task Name" required>
+                <textarea id="taskDescription" rows="4" placeholder="Description" required></textarea>
+                <input type="number" id="taskTimeLimit" placeholder="Time Limit (mins)" required min="1">
+                <button class="create-button" onclick="createTask()">Create</button>
+            </div>
+        </div>
+
+        <div class="timer-container">
+            <div id="timer-display">00:00:00</div>
+            <button id="start-btn" onclick="startTimer()">Start Timer</button>
+            <button id="reset-btn" onclick="resetTimer()">Reset</button>
+        </div>
+    </section>
+    <div class="chat-icon" id="chatIcon">
+        <img src="magicbus.png" alt="Chatbot Icon">
+    </div>
+    
+    <!-- Chatbot Window (hidden by default) -->
+    <div class="chatbot-window" id="chatbotWindow">
+        <div class="chatbot-header">
+            <h4>Magicbus A.I</h4>
+            <span class="close-btn" id="closeBtn">&times;</span>
+        </div>
+        <div class="chatbot-body">
+            <iframe src="http://127.0.0.1:5500/chatbot.html" width="100%" height="400px"></iframe>
+        </div>
+    </div>
+
+    <script>
+        function createTask() {
+    const taskName = document.getElementById("taskName").value.trim();
+    const taskDescription = document.getElementById("taskDescription").value.trim();
+    const taskTimeLimit = document.getElementById("taskTimeLimit").value.trim();
+
+    if (taskName && taskDescription && taskTimeLimit) {
+        const ul = document.getElementById("todo-list");
+        const li = document.createElement("li");
+
+        li.innerHTML = `${taskName} - ${taskDescription} (Time: ${taskTimeLimit} mins) 
+                        <button class="remove-btn" onclick="removeTask(this)">Remove</button>`;
+        ul.appendChild(li);
+
+        document.getElementById("taskName").value = '';
+        document.getElementById("taskDescription").value = '';
+        document.getElementById("taskTimeLimit").value = '';
+
+        const timeInMs = taskTimeLimit * 60000; // Convert minutes to milliseconds
+        setTimeout(() => {
+            alert(`Reminder: Time is up for the task - "${taskName}"`);
+        }, timeInMs);
+
+    } else {
+        alert("Please fill in all the fields: task name, description, and time limit.");
+    }
+}
+
+function removeTask(button) {
+    const li = button.parentElement;
+    li.remove();
+}
+
+
+        let timer;
+        let totalSeconds = 0;
+        let running = false;
+
+        function startTimer() {
+            if (!running) {
+                running = true;
+                timer = setInterval(updateTimer, 1000);
+            }
+        }
+
+        function resetTimer() {
+            clearInterval(timer);
+            totalSeconds = 0;
+            running = false;
+            document.getElementById('timer-display').textContent = '00:00:00';
+        }
+
+        function updateTimer() {
+            totalSeconds++;
+            let hours = Math.floor(totalSeconds / 3600);
+            let minutes = Math.floor((totalSeconds % 3600) / 60);
+            let seconds = totalSeconds % 60;
+
+            document.getElementById('timer-display').textContent =
+                (hours < 10 ? '0' : '') + hours + ':' +
+                (minutes < 10 ? '0' : '') + minutes + ':' +
+                (seconds < 10 ? '0' : '') + seconds;
+        }
+
+        const chatIcon = document.getElementById('chatIcon');
+        const chatbotWindow = document.getElementById('chatbotWindow');
+        const closeBtn = document.getElementById('closeBtn');
+
+        chatIcon.addEventListener('click', () => {
+             if (chatbotWindow.style.display === 'block') {
+                chatbotWindow.style.display = 'none';  // Hide chatbot if it's open
+             } else {
+              chatbotWindow.style.display = 'block'; // Show chatbot if it's hidden
+              }
+}       );
+
+        closeBtn.addEventListener('click', () => {
+           chatbotWindow.style.display = 'none'; // Hide chatbot
+        });
+
+    document.getElementById("logout-link").addEventListener("click", function() {
+        // Redirect to login page
+        window.location.href = 'http://127.0.0.1:5500/login.html';
+    });
+    </script>
+</body>
+</html>
